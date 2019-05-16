@@ -103,11 +103,12 @@ set dt 1.0
 
 # JP update
 # timeSeries Path $tag -fileTime $fileTime -filePath $filePath <-factor $cFactor> <-useLast>
+# X与Y向位移的时间交错进行
+timeSeries  Path 101 -fileTime time1.txt -filePath dis1.txt ; # X方向位移
+timeSeries  Path 202 -fileTime time2.txt -filePath dis2.txt ; # Y方向位移
 
-timeSeries  Path 101 -fileTime time1.txt -filePath dis1.txt ;
-timeSeries  Path 202 -fileTime time2.txt -filePath dis2.txt ;
-
-
+#加载命令
+#分别将107、108行的位移加载到荷载施加点的两个方向（位移荷载）
 
 pattern Plain 2 101 {
     sp 2 1 1;
@@ -115,8 +116,9 @@ pattern Plain 2 101 {
 pattern Plain 23 202 {
     sp 2 2 1;
 }
-
+# 
 #source LibAnalysisStaticParameters.tcl
+# 施加重力
 constraints Penalty 1.0e10 1.0e10;
 numberer RCM;
 system BandGeneral;
@@ -126,7 +128,10 @@ integrator LoadControl 1;
 analysis Static;
 integrator DisplacementControl 2 1 0.01;   
 
-source LibAnalysisDynamicParameters.tcl;
+# 调入动力荷载的加载参数（直接调用官网的地震分析例子即可，拟静力加载和地震加载对Opensees来说是一样的，都是按照时间-荷载来处理
+# 所以直接调用地震分析的算法迭代即可）
+
+source LibAnalysisDynamicParameters.tcl; # 动力分析参数，参考根目录
 set Tol 1e-20
 set TmaxAnalysis 29014;
 set DtAnalysis 1.0
