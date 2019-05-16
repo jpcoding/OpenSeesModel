@@ -103,7 +103,7 @@ set dt 1.0
 
 # JP update
 # timeSeries Path $tag -fileTime $fileTime -filePath $filePath <-factor $cFactor> <-useLast>
-# X与Y向位移的时间交错进行，格式参考根目录中的  dis1.txt  dis2.txt 
+# X与Y向位移的时间交错进行，格式参考根目录中的  time1.txt + dis1.txt  time2.txt + dis2.txt 
 timeSeries  Path 101 -fileTime time1.txt -filePath dis1.txt ; # X方向位移
 timeSeries  Path 202 -fileTime time2.txt -filePath dis2.txt ; # Y方向位移
 
