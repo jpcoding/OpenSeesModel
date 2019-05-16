@@ -118,7 +118,8 @@ pattern Plain 23 202 {
 }
 # 
 #source LibAnalysisStaticParameters.tcl
-# 施加重力
+
+#开始分析
 constraints Penalty 1.0e10 1.0e10;
 numberer RCM;
 system BandGeneral;
